@@ -1,5 +1,5 @@
-#ifndef Pins_h
-#define Pins_h
+#ifndef Pins_H
+#define Pins_H
 
 #define VOL_MEASURE_PIN A2
 #define ECHO_PIN A3
