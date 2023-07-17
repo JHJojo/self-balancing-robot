@@ -1,8 +1,8 @@
-#include <Arduino.h>
-#include "Wire.h"
 #include "I2Cdev.h"
 #include "MPU6050.h"
+#include "Wire.h"
 #include "math.h"
+#include <Arduino.h>
 
 MPU6050 mpu;
 
@@ -13,8 +13,7 @@ const float dt = 0.01;    // sampling time in seconds
 float roll;
 float prevRoll = 0;
 
-void setup()
-{
+void setup() {
   Wire.begin();
   mpu.initialize();
 
@@ -29,8 +28,7 @@ void setup()
   Serial.begin(9600);
 }
 
-void loop()
-{
+void loop() {
   // read acceleration values ​​and gyro rates
   int16_t ax, ay, az, gx, gy, gz;
   mpu.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);
