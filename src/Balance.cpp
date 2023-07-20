@@ -62,6 +62,11 @@ void Balance::Total_Control() {
   while (mpu.roll > 27 || mpu.roll < -27) {
     mpu.DataProcessing();
     motor.Stop();
+    speed_control_output = 0;
+    balance_control_output = 0;
+    speed_filter = 0;
+    car_speed_integeral = 0;
+    speed_filter_old = 0;
   }
 
   // control motors (forward or backward) based on PWM values
