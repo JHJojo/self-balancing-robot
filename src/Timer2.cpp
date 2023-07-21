@@ -6,7 +6,7 @@
 extern Mpu mpu;
 extern Balance balance;
 
-void Timer2::init(int time) {
+void Timer2::Init(int time) {
   MsTimer2::set(time, interrupt);
   MsTimer2::start();
 }

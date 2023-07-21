@@ -3,7 +3,7 @@
 
 class Mpu {
 public:
-  void init();
+  void Init();
   // calculates angle of robot
   void DataProcessing();
 

@@ -3,7 +3,7 @@
 
 MPU6050 mpu6050;
 
-void Mpu::init() {
+void Mpu::Init() {
   Wire.begin();
   mpu6050.initialize();
   mpu6050.setXAccelOffset(-509);

@@ -15,8 +15,8 @@ Balance balance;
 void setup() {
   motor.Pin_init();
   motor.Encoder_init();
-  timer2.init(timer2.time);
-  mpu.init();
+  timer2.Init(timer2.time);
+  mpu.Init();
   Serial.begin(9600);
   delay(100);
 }

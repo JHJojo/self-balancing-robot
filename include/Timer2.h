@@ -3,7 +3,7 @@
 
 class Timer2 {
 public:
-  void init(int time);
+  void Init(int time);
   // main interrupt which triggers the different PID functions
   static void interrupt();
   
