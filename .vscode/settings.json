@@ -1,10 +1,12 @@
 {
     "cmake.configureOnOpen": false,
     "cSpell.words": [
+        "integeral",
         "NUMPIXELS",
         "PWMA",
         "PWMB",
         "STBY",
-        "strbuf"
+        "strbuf",
+        "TARGETANGLE"
     ],
 }
