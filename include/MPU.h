@@ -9,6 +9,7 @@ public:
 
   float roll;
   float prevRoll = 0;
+  float gyroZ;
 
 private:
   // constants for the complementary filter

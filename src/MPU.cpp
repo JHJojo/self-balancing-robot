@@ -29,6 +29,7 @@ void Mpu::DataProcessing() {
 
   // roll angle calculation with gyroscope
   float gyroRoll = gx / 131.0;
+  gyroZ = gz / 131.0;
 
   // final roll angle calculation with the complementary filter
   roll = alpha * (prevRoll + gyroRoll * dt) + (1 - alpha) * accelRoll;

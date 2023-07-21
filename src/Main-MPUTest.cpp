@@ -44,11 +44,15 @@ void loop() {
   // roll angle calculation with gyroscope
   float gyroRoll = gx / 131.0;
 
+  float gyroZ = gz / 131.0;
+
   // final roll angle calculation with the complementary filter
   roll = alpha * (prevRoll + gyroRoll * dt) + (1 - alpha) * accelRoll;
 
   Serial.print("Roll: ");
-  Serial.print(roll);
+  Serial.println(roll);
+  Serial.print("gyroZ: ");
+  Serial.print(gyroZ);
 
   prevRoll = roll;
 
