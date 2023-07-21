@@ -8,10 +8,10 @@ public:
   void Get_EncoderSpeed();
   // function to keep the robot in a stable vertical position
   void PID_Vertical();
+  // function to stabilize the z-axis of the robot
+  void PID_Steering();
   // function to stabilize the horizontal position of the robot
   void PID_Speed();
-
-  //TODO PID for rotation
 
   // function to set motor speed based on PID controllers
   void Total_Control();
@@ -27,11 +27,15 @@ public:
   // PID parameter
   double kp_balance, kd_balance;
   double kp_speed, ki_speed;
+  double kd_turn;
 
   double speed_filter;
   double speed_filter_old;
   double car_speed_integeral;
   double balance_control_output;
+  double rotation_control_output;
   double speed_control_output;
+  double setting_turn_speed = 0;
+  double setting_car_speed = 0;
 };
 #endif

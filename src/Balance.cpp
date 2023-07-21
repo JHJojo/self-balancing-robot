@@ -13,6 +13,7 @@ Balance::Balance() {
   // initialize PID parameters
   kp_balance = 40, kd_balance = 0.8;
   kp_speed = 10, ki_speed = 0.26;
+  kd_turn = 0.5;
 }
 
 void Balance::Get_EncoderSpeed() {
@@ -31,6 +32,11 @@ void Balance::PID_Vertical() {
       kp_balance * (mpu.roll - TARGETANGLE) + kd_balance * (((mpu.roll - TARGETANGLE) - (mpu.prevRoll - TARGETANGLE)) / 5);
 }
 
+void Balance::PID_Steering()
+{  
+  rotation_control_output = setting_turn_speed + kd_turn * mpu.gyroZ;
+}
+
 void Balance::PID_Speed() {
   // get average speed
   double car_speed = (encoder_left_pulse_num_speed + encoder_right_pulse_num_speed) / 2;
@@ -43,6 +49,7 @@ void Balance::PID_Speed() {
 
   // calculate speed integral and limit it to a certain range
   car_speed_integeral += speed_filter;
+  car_speed_integeral += -setting_car_speed; 
   car_speed_integeral = constrain(car_speed_integeral, -3000, 3000);
 
   // PI control for horizontal position (no D parameter at the moment could be added later, but is not mandatory)
@@ -51,8 +58,8 @@ void Balance::PID_Speed() {
 
 void Balance::Total_Control() {
   // calculate PWM values for the motors
-  pwm_left = balance_control_output - speed_control_output;
-  pwm_right = balance_control_output - speed_control_output;
+  pwm_left = balance_control_output - speed_control_output - rotation_control_output;
+  pwm_right = balance_control_output - speed_control_output + rotation_control_output;
 
   // limit PWM values to the range [-255, 255]
   pwm_left = constrain(pwm_left, -255, 255);
