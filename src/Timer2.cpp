@@ -21,6 +21,7 @@ void Timer2::interrupt() {
   if (balance.interrupt_cnt > 8) {
     balance.interrupt_cnt = 0;
     balance.PID_Speed();
+    balance.PID_Steering();
   }
   balance.Total_Control();
 }
