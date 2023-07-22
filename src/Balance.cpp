@@ -13,7 +13,7 @@ Balance::Balance() {
   // initialize PID parameters
   kp_balance = 40, kd_balance = 0.8;
   kp_speed = 10, ki_speed = 0.26;
-  kd_turn = 0.5;
+  kd_turn = 0.25;
 }
 
 void Balance::Get_EncoderSpeed() {
@@ -74,6 +74,7 @@ void Balance::Total_Control() {
     speed_filter = 0;
     car_speed_integeral = 0;
     speed_filter_old = 0;
+    rotation_control_output = 0;
   }
 
   // control motors (forward or backward) based on PWM values

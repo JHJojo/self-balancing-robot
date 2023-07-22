@@ -1,5 +1,5 @@
-#include <Arduino.h>
 #include "Voltage.h"
+#include <Arduino.h>
 
 Voltage voltage;
 
@@ -8,11 +8,8 @@ void setup() {
   voltage.Init();
 }
 
-void loop() 
-{
-    voltage.VoltageMeasure();
-    Serial.print("Voltage: ");
-    Serial.println(voltage.voltage);
+void loop() {
+  voltage.VoltageMeasure();
+  Serial.print("Voltage: ");
+  Serial.println(voltage.voltage);
 }
-
-

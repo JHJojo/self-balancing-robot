@@ -3,14 +3,14 @@
 
 class Voltage {
 public:
-    void Init();
+  void Init();
 
-    void VoltageMeasure();
+  void VoltageMeasure();
 
-    double voltage;
+  double voltage;
 
 private:
-    unsigned long vol_measure_time = 0;
-    int low_voltage_flag = 1;
+  unsigned long vol_measure_time = 0;
+  int low_voltage_flag = 1;
 };
 #endif
