@@ -11,9 +11,9 @@ extern Balance balance;
 
 Balance::Balance() {
   // initialize PID parameters
-  kp_balance = 40, kd_balance = 0.8;
+  kp_vertical= 40, kd_vertical = 0.8;
   kp_speed = 10, ki_speed = 0.26;
-  kd_turn = 0.25;
+  kp_steering = 1, ki_steering = 0.1;
 }
 
 void Balance::Get_EncoderSpeed() {
@@ -29,12 +29,15 @@ void Balance::Get_EncoderSpeed() {
 void Balance::PID_Vertical() {
   // PD control for vertical balance (no I parameter at the moment could be added later, but is not mandatory)
   balance_control_output =
-      kp_balance * (mpu.roll - TARGETANGLE) + kd_balance * (((mpu.roll - TARGETANGLE) - (mpu.prevRoll - TARGETANGLE)) / 5);
+      kp_vertical * (mpu.roll - TARGETANGLE) + kd_vertical * (((mpu.roll - TARGETANGLE) - (mpu.prevRoll - TARGETANGLE)) / 5);
 }
 
 void Balance::PID_Steering()
-{  
-  rotation_control_output = setting_turn_speed + kd_turn * mpu.gyroZ;
+{ 
+  Serial.println(mpu.gyroZ);
+  steering_control_output =  kp_steering * (mpu.gyroZ - setting_turn_speed) + ki_steering * steering_control_integral;
+  steering_control_integral += (mpu.gyroZ - setting_turn_speed);
+  //steering_control_integral += -setting_turn_speed;
 }
 
 void Balance::PID_Speed() {
@@ -58,8 +61,8 @@ void Balance::PID_Speed() {
 
 void Balance::Total_Control() {
   // calculate PWM values for the motors
-  pwm_left = balance_control_output - speed_control_output - rotation_control_output;
-  pwm_right = balance_control_output - speed_control_output + rotation_control_output;
+  pwm_left = balance_control_output - speed_control_output + steering_control_integral;
+  pwm_right = balance_control_output - speed_control_output - steering_control_integral;
 
   // limit PWM values to the range [-255, 255]
   pwm_left = constrain(pwm_left, -255, 255);
@@ -74,7 +77,8 @@ void Balance::Total_Control() {
     speed_filter = 0;
     car_speed_integeral = 0;
     speed_filter_old = 0;
-    rotation_control_output = 0;
+    steering_control_integral = 0;
+    steering_control_output = 0;
   }
 
   // control motors (forward or backward) based on PWM values

@@ -25,17 +25,18 @@ public:
   int interrupt_cnt;
 
   // PID parameter
-  double kp_balance, kd_balance;
+  double kp_vertical, kd_vertical;
   double kp_speed, ki_speed;
-  double kd_turn;
+  double kp_steering, ki_steering;
 
   double speed_filter;
   double speed_filter_old;
   double car_speed_integeral;
   double balance_control_output;
-  double rotation_control_output;
+  double steering_control_output;
+  double steering_control_integral;
   double speed_control_output;
-  double setting_turn_speed = 0;
+  double setting_turn_speed = 100;
   double setting_car_speed = 0;
 };
 #endif
