@@ -34,7 +34,6 @@ void Balance::PID_Vertical() {
 
 void Balance::PID_Steering()
 { 
-  Serial.println(mpu.gyroZ);
   steering_control_output =  kp_steering * (mpu.gyroZ - setting_turn_speed) + ki_steering * steering_control_integral;
   steering_control_integral += (mpu.gyroZ - setting_turn_speed);
   //steering_control_integral += -setting_turn_speed;

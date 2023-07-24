@@ -1,6 +1,7 @@
 #include "Motor.h"
 #include "PinChangeInt.h"
 #include "Pins.h"
+#include "Infrared.h"
 #include <Arduino.h>
 
 void Motor::Pin_init() {
@@ -70,3 +71,11 @@ void Motor::EncoderCountRightA() { Motor::encoder_count_right_a++; }
 
 unsigned long Motor::encoder_count_left_a;
 void Motor::EncoderCountLeftA() { Motor::encoder_count_left_a++; }
+
+void Infrared::Init() {
+  pinMode(LEFT_RECEIVE_PIN, INPUT_PULLUP);
+  pinMode(RIGHT_RECEIVE_PIN, INPUT_PULLUP);
+  pinMode(IR_SEND_PIN, OUTPUT);
+  attachPinChangeInterrupt(LEFT_RECEIVE_PIN, Left_Receive, FALLING);
+  attachPinChangeInterrupt(RIGHT_RECEIVE_PIN, Right_Receive, FALLING);
+}
