@@ -14,7 +14,7 @@ Mpu mpu;
 Motor motor;
 Balance balance;
 
-int follow_prev_time = 0;
+unsigned long follow_prev_time = 0;
 
 void setup() {
   motor.Pin_init();
@@ -30,7 +30,7 @@ void loop() {
   infrared.Send();
 
   if (millis() - follow_prev_time >= 100) {
-    Serial.println("Check");
+    Serial.println(follow_prev_time);
     infrared.Check();
     follow_prev_time = millis();
   }

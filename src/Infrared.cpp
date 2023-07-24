@@ -19,30 +19,6 @@ void Infrared::Send() {
   }
 }
 
-void Infrared::Check() {
-  int motion = left_is_obstacle + right_is_obstacle;
-  switch (motion) {
-  case NOTHING:
-    balance.setting_turn_speed = 0;
-    balance.setting_car_speed = 0;
-    break;
-  case FOLLOW_LEFT:
-    balance.setting_turn_speed = 50;
-    left_is_obstacle = 0;
-    break;
-  case FOLLOW_RIGHT:
-    balance.setting_turn_speed = -50;
-    right_is_obstacle = 0;
-    break;
-
-  case FOLLOW_BACK:
-    balance.setting_car_speed = -40;
-    right_is_obstacle = 0;
-    left_is_obstacle = 0;
-    break;
-  }
-}
-
 int Infrared::left_is_obstacle;
 int Infrared::right_is_obstacle;
 unsigned int Infrared::left_count;
@@ -55,4 +31,33 @@ void Infrared::Right_Receive()
 { 
    right_is_obstacle=2;
 }
+
+void Infrared::Check() {
+  int motion = left_is_obstacle + right_is_obstacle;
+  switch (motion) {
+  case FOLLOW_LEFT:
+    balance.setting_turn_speed = 50;
+    balance.setting_car_speed = 0;
+    left_is_obstacle = 0;
+    break;
+  case FOLLOW_RIGHT:
+    balance.setting_turn_speed = -50;
+    balance.setting_car_speed = 0;
+    right_is_obstacle = 0;
+    break;
+  case FOLLOW_BACK:
+    balance.setting_car_speed = -10;
+    balance.setting_turn_speed = 0;
+    left_is_obstacle = 0;
+    right_is_obstacle = 0;
+    break;
+  default:
+    balance.setting_car_speed =  0;
+    balance.setting_turn_speed = 0;
+    left_is_obstacle = 0;
+    right_is_obstacle = 0;
+    break;
+  }
+}
+
 

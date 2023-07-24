@@ -36,7 +36,7 @@ public:
   double steering_control_output;
   double steering_control_integral;
   double speed_control_output;
-  double setting_turn_speed = 100;
+  double setting_turn_speed = 0;
   double setting_car_speed = 0;
 };
 #endif
