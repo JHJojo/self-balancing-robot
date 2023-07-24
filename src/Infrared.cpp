@@ -21,18 +21,10 @@ void Infrared::Send() {
 
 int Infrared::left_is_obstacle;
 int Infrared::right_is_obstacle;
-unsigned int Infrared::left_count;
-unsigned int Infrared::right_count;
-void Infrared::Left_Receive()
-{ 
-   left_is_obstacle=1;
-}
-void Infrared::Right_Receive()
-{ 
-   right_is_obstacle=2;
-}
+void Infrared::Left_Receive() { left_is_obstacle = 1; }
+void Infrared::Right_Receive() { right_is_obstacle = 2; }
 
-void Infrared::Check() {
+void Infrared::ObjectIsDetected() {
   int motion = left_is_obstacle + right_is_obstacle;
   switch (motion) {
   case FOLLOW_LEFT:
@@ -46,18 +38,16 @@ void Infrared::Check() {
     right_is_obstacle = 0;
     break;
   case FOLLOW_BACK:
-    balance.setting_car_speed = -10;
+    balance.setting_car_speed = -30;
     balance.setting_turn_speed = 0;
     left_is_obstacle = 0;
     right_is_obstacle = 0;
     break;
   default:
-    balance.setting_car_speed =  0;
+    balance.setting_car_speed = 0;
     balance.setting_turn_speed = 0;
     left_is_obstacle = 0;
     right_is_obstacle = 0;
     break;
   }
 }
-
-

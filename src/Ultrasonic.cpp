@@ -24,5 +24,5 @@ void Ultrasonic::Get_Distance() {
 }
 
 void Ultrasonic::ObjectIsDetected() {
-  FOUND_OBJECT ? balance.setting_car_speed = 40 : balance.setting_car_speed = 0;
+  FOUND_OBJECT ? balance.setting_car_speed = 40, balance.setting_turn_speed = 0 : balance.setting_car_speed = 0, balance.setting_turn_speed = 0;
 }

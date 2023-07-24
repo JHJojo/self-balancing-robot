@@ -1,6 +1,5 @@
 #include "Motor.h"
 #include "Pins.h"
-#include "Infrared.h"
 #include <Arduino.h>
 
 void Motor::Pin_init() {

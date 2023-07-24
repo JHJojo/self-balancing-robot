@@ -1,37 +1,41 @@
 #include "Balance.h"
+#include "Follow.h"
 #include "I2Cdev.h"
+#include "Infrared.h"
 #include "MPU.h"
 #include "Motor.h"
 #include "Timer2.h"
-#include "Infrared.h"
+#include "Ultrasonic.h"
+#include "Voltage.h"
 #include "Wire.h"
 #include "math.h"
 #include <Arduino.h>
 
-Infrared infrared;
+
+Ultrasonic ultrasonic;
 Timer2 timer2;
 Mpu mpu;
 Motor motor;
 Balance balance;
+Voltage voltage;
+Infrared infrared;
+Follow follow;
 
-unsigned long follow_prev_time = 0;
+int follow_prev_time = 0;
 
 void setup() {
+  voltage.Init();
   motor.Pin_init();
   motor.Encoder_init();
   timer2.Init(timer2.time);
   mpu.Init();
+  ultrasonic.Init();
   infrared.Init();
   Serial.begin(9600);
   delay(100);
 }
 
 void loop() {
-  infrared.Send();
-
-  if (millis() - follow_prev_time >= 100) {
-    Serial.println(follow_prev_time);
-    infrared.ObjectIsDetected();
-    follow_prev_time = millis();
-  }
+  voltage.VoltageMeasure();
+  follow.Follow_Mode();
 }
