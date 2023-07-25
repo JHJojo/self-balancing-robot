@@ -17,6 +17,6 @@ Features:
 - 2S LiPo-Akku
 
 ## Einstieg Software
-Das Projekt basiert auf der PlatformIO Entwicklungsumgebung : [PlatformIO](https://platformio.org/)
+Das Projekt basiert auf der PlatformIO Entwicklungsumgebung : [PlatformIO](https://platformio.org/) <br />
 Gegebenenfalls könnte auch die Arduino IDE verwendet werden.
 
