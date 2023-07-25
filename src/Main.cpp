@@ -21,16 +21,16 @@ Voltage voltage;
 Infrared infrared;
 Follow follow;
 
-int follow_prev_time = 0;
+unsigned int follow_prev_time = 0;
 
 void setup() {
   voltage.Init();
-  motor.Pin_init();
-  motor.Encoder_init();
-  timer2.Init(timer2.time);
   mpu.Init();
   ultrasonic.Init();
   infrared.Init();
+  motor.Pin_init();
+  motor.Encoder_init();
+  timer2.Init(timer2.time);
   Serial.begin(9600);
   delay(100);
 }
@@ -39,3 +39,4 @@ void loop() {
   voltage.VoltageMeasure();
   follow.Follow_Mode();
 }
+

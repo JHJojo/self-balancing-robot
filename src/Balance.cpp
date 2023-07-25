@@ -11,7 +11,7 @@ extern Balance balance;
 
 Balance::Balance() {
   // initialize PID parameters
-  kp_vertical= 40, kd_vertical = 0.8;
+  kp_vertical = 40, kd_vertical = 0.8;
   kp_speed = 10, ki_speed = 0.26;
   kp_steering = 1, ki_steering = 0.1;
 }
@@ -29,14 +29,13 @@ void Balance::Get_EncoderSpeed() {
 void Balance::PID_Vertical() {
   // PD control for vertical balance (no I parameter at the moment could be added later, but is not mandatory)
   balance_control_output =
-      kp_vertical * (mpu.roll - TARGETANGLE) + kd_vertical * (((mpu.roll - TARGETANGLE) - (mpu.prevRoll - TARGETANGLE)) / 5);
+    kp_vertical * (mpu.roll - TARGETANGLE) + kd_vertical * (((mpu.roll - TARGETANGLE) - (mpu.prevRoll - TARGETANGLE)) / 5);
 }
 
-void Balance::PID_Steering()
-{ 
-  steering_control_output =  kp_steering * (mpu.gyroZ - setting_turn_speed) + ki_steering * steering_control_integral;
+void Balance::PID_Steering() {
+  steering_control_output = kp_steering * (mpu.gyroZ - setting_turn_speed) + ki_steering * steering_control_integral;
   steering_control_integral += (mpu.gyroZ - setting_turn_speed);
-  //steering_control_integral += -setting_turn_speed;
+  // steering_control_integral += -setting_turn_speed;
 }
 
 void Balance::PID_Speed() {
@@ -51,7 +50,7 @@ void Balance::PID_Speed() {
 
   // calculate speed integral and limit it to a certain range
   car_speed_integeral += speed_filter;
-  car_speed_integeral += -setting_car_speed; 
+  car_speed_integeral += -setting_car_speed;
   car_speed_integeral = constrain(car_speed_integeral, -3000, 3000);
 
   // PI control for horizontal position (no D parameter at the moment could be added later, but is not mandatory)
@@ -67,6 +66,8 @@ void Balance::Total_Control() {
   pwm_left = constrain(pwm_left, -255, 255);
   pwm_right = constrain(pwm_right, -255, 255);
 
+  unsigned long time;
+
   // stop motors when the robot falls
   while (mpu.roll > 27 || mpu.roll < -27) {
     mpu.DataProcessing();
@@ -78,6 +79,12 @@ void Balance::Total_Control() {
     speed_filter_old = 0;
     steering_control_integral = 0;
     steering_control_output = 0;
+    if (millis() - time >= 5000) {
+      motor.Forward(250);
+      delay(50);
+      motor.Stop();
+      time = millis();
+    }
   }
 
   // control motors (forward or backward) based on PWM values
@@ -88,41 +95,36 @@ void Balance::Total_Control() {
   {
     motor.Forward(pwm_left);
   }*/
-  
-  // cleaner implementation to include rotation later
-  (pwm_left < 0) ? (motor.Control(AIN1, 1, PWMA_LEFT, -pwm_left))
-                 : (motor.Control(AIN1, 0, PWMA_LEFT, pwm_left));
 
-  (pwm_right < 0) ? (motor.Control(BIN1, 1, PWMB_RIGHT, -pwm_right))
-                  : (motor.Control(BIN1, 0, PWMB_RIGHT, pwm_right));
+  // cleaner implementation to include rotation later
+    (pwm_left < 0) ? (motor.Control(AIN1, 1, PWMA_LEFT, -pwm_left))
+                   : (motor.Control(AIN1, 0, PWMA_LEFT, pwm_left));
+
+    (pwm_right < 0) ? (motor.Control(BIN1, 1, PWMB_RIGHT, -pwm_right))
+                    : (motor.Control(BIN1, 0, PWMB_RIGHT, pwm_right));
 }
 
-void Balance::Stop()
-{
+void Balance::Stop() {
   setting_car_speed = 0;
   setting_turn_speed = 0;
 }
 
-void Balance::Forward(int car_speed)
-{
+void Balance::Forward(int car_speed) {
   setting_car_speed = car_speed;
   setting_turn_speed = 0;
 }
 
-void Balance::Back(int car_speed)
-{
+void Balance::Back(int car_speed) {
   setting_car_speed = -car_speed;
   setting_turn_speed = 0;
 }
 
-void Balance::Left(int turn_speed)
-{
+void Balance::Left(int turn_speed) {
   setting_car_speed = 0;
   setting_turn_speed = turn_speed;
 }
 
-void Balance::Right(int turn_speed)
-{
+void Balance::Right(int turn_speed) {
   setting_car_speed = 0;
   setting_turn_speed = -turn_speed;
 }
