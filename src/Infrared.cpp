@@ -28,24 +28,20 @@ void Infrared::ObjectIsDetected() {
   int motion = left_is_obstacle + right_is_obstacle;
   switch (motion) {
   case FOLLOW_LEFT:
-    balance.setting_turn_speed = 50;
-    balance.setting_car_speed = 0;
+    balance.Left(50);
     left_is_obstacle = 0;
     break;
   case FOLLOW_RIGHT:
-    balance.setting_turn_speed = -50;
-    balance.setting_car_speed = 0;
+    balance.Right(50);
     right_is_obstacle = 0;
     break;
   case FOLLOW_BACK:
-    balance.setting_car_speed = -30;
-    balance.setting_turn_speed = 0;
+    balance.Back(30);
     left_is_obstacle = 0;
     right_is_obstacle = 0;
     break;
   default:
-    balance.setting_car_speed = 0;
-    balance.setting_turn_speed = 0;
+    balance.Stop();
     left_is_obstacle = 0;
     right_is_obstacle = 0;
     break;

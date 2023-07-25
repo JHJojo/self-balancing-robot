@@ -16,6 +16,12 @@ public:
   // function to set motor speed based on PID controllers
   void Total_Control();
 
+  void Stop();
+  void Forward(int car_speed);
+  void Back(int car_speed);
+  void Left(int turn_speed);
+  void Right(int turn_speed);
+
   // speed values
   double pwm_left;
   double pwm_right;

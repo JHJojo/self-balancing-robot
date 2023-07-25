@@ -96,3 +96,33 @@ void Balance::Total_Control() {
   (pwm_right < 0) ? (motor.Control(BIN1, 1, PWMB_RIGHT, -pwm_right))
                   : (motor.Control(BIN1, 0, PWMB_RIGHT, pwm_right));
 }
+
+void Balance::Stop()
+{
+  setting_car_speed = 0;
+  setting_turn_speed = 0;
+}
+
+void Balance::Forward(int car_speed)
+{
+  setting_car_speed = car_speed;
+  setting_turn_speed = 0;
+}
+
+void Balance::Back(int car_speed)
+{
+  setting_car_speed = -car_speed;
+  setting_turn_speed = 0;
+}
+
+void Balance::Left(int turn_speed)
+{
+  setting_car_speed = 0;
+  setting_turn_speed = turn_speed;
+}
+
+void Balance::Right(int turn_speed)
+{
+  setting_car_speed = 0;
+  setting_turn_speed = -turn_speed;
+}
