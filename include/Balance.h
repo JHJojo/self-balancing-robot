@@ -30,6 +30,8 @@ public:
 
   int interrupt_cnt;
 
+  bool first_start = false;
+
   // PID parameter
   double kp_vertical, kd_vertical;
   double kp_speed, ki_speed;

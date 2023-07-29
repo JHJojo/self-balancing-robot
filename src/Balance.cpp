@@ -7,7 +7,7 @@
 extern Mpu mpu;
 extern Motor motor;
 extern Balance balance;
-#define TARGETANGLE 0
+#define TARGETANGLE -2.5 //better value after attached fall support (without value should be 0)
 
 Balance::Balance() {
   // initialize PID parameters
@@ -82,8 +82,13 @@ void Balance::Total_Control() {
     if (millis() - time >= 5000) {
       motor.Forward(250);
       delay(50);
-      motor.Stop();
       time = millis();
+      if (first_start == false)
+      {
+        encoder_left_pulse_num_speed = 200;
+        encoder_right_pulse_num_speed = 200;
+        first_start = true;
+      }
     }
   }
 

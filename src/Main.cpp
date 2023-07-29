@@ -11,7 +11,6 @@
 #include "math.h"
 #include <Arduino.h>
 
-
 Ultrasonic ultrasonic;
 Timer2 timer2;
 Mpu mpu;
@@ -39,4 +38,3 @@ void loop() {
   voltage.VoltageMeasure();
   follow.Follow_Mode();
 }
-
