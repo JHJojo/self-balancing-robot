@@ -2,6 +2,7 @@
 #include "PinChangeInt.h"
 #include "Infrared.h"
 #include "Pins.h"
+#include "Control.h"
 
 void Motor::Encoder_init() {
   attachInterrupt(digitalPinToInterrupt(ENCODER_LEFT_A_PIN), EncoderCountLeftA, CHANGE);
@@ -15,4 +16,9 @@ void Infrared::Init() {
   pinMode(IR_SEND_PIN, OUTPUT);
   attachPinChangeInterrupt(LEFT_RECEIVE_PIN, Left_Receive, FALLING);
   attachPinChangeInterrupt(RIGHT_RECEIVE_PIN, Right_Receive, FALLING);
+}
+
+void Control::Init(){
+  pinMode(BUTTON, INPUT_PULLUP);
+  attachPinChangeInterrupt(BUTTON, Button_State, FALLING);
 }
