@@ -1,9 +1,11 @@
 #include "Ultrasonic.h"
 #include "Balance.h"
 #include "Pins.h"
+#include "LED.h"
 #include <Arduino.h>
 
 extern Balance balance;
+extern Led led;
 
 void Ultrasonic::Init() {
   pinMode(ECHO_PIN, INPUT);
@@ -24,5 +26,5 @@ void Ultrasonic::Get_Distance() {
 }
 
 void Ultrasonic::ObjectIsDetected() {
-  FOUND_OBJECT ? balance.Forward(40) : balance.Stop();
+  FOUND_OBJECT ? balance.Forward(40), led.Front(led.Color(0, 255, 0)) : balance.Stop();
 }

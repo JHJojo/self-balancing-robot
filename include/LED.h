@@ -10,15 +10,21 @@ public:
   Led() : Adafruit_NeoPixel(NUMPIXELS, RGB_PIN, NEO_GRB + NEO_KHZ800){}
   void Init();
 
-  void Red(int pixel_number);
-  void Green(int pixel_number);
-  void Blue(int pixel_number);
+  void Off();
+  void Red();
+  void Green();
+  void Blue();
+
+  void Left(uint32_t color);
+  void Right(uint32_t color);
+  void Front(uint32_t color);
+  void Back(uint32_t color);
 
   void ColorWipe(uint32_t color, int wait);
   void Rainbow(int wait);
 
 private:
-    int brightness = 50;
+    int brightness = 30;
 
 };
 

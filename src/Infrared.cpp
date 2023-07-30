@@ -1,9 +1,11 @@
 #include "Infrared.h"
 #include "Balance.h"
 #include "Pins.h"
+#include "LED.h"
 #include <Arduino.h>
 
 extern Balance balance;
+extern Led led;
 
 void Infrared::Send() {
   static unsigned long ir_send_time;
@@ -29,14 +31,17 @@ void Infrared::ObjectIsDetected() {
   switch (motion) {
   case FOLLOW_LEFT:
     balance.Left(50);
+    led.Left(led.Color(0, 255, 0));
     left_is_obstacle = 0;
     break;
   case FOLLOW_RIGHT:
     balance.Right(50);
+    led.Right(led.Color(0, 255, 0));
     right_is_obstacle = 0;
     break;
   case FOLLOW_BACK:
     balance.Back(30);
+    led.Back(led.Color(0, 255, 0));
     left_is_obstacle = 0;
     right_is_obstacle = 0;
     break;
