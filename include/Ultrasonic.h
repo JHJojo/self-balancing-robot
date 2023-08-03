@@ -3,7 +3,7 @@
 
 class Ultrasonic {
 public:
-  void Init();
+  //void Init();
   void Get_Distance();
   void ObjectIsDetected();
 

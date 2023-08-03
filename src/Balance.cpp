@@ -81,7 +81,7 @@ void Balance::Total_Control() {
     steering_control_output = 0;
     if (millis() - time >= 5000) {
       motor.Forward(250);
-      delay(50);
+      delay(45);
       time = millis();
       if (first_start == false)
       {

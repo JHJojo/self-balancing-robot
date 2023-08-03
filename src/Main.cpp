@@ -31,7 +31,7 @@ unsigned int follow_prev_time = 0;
 void setup() {
   voltage.Init();
   mpu.Init();
-  ultrasonic.Init();
+  //ultrasonic.Init();
   infrared.Init();
   motor.Pin_init();
   motor.Encoder_init();
@@ -51,6 +51,7 @@ void loop() {
   } else if (control.function_state == FOLLOW) {
     follow.Follow_Mode();
   } else if (control.function_state == LED) {
+    led.Off();
     balance.setting_car_speed = 0;
     balance.setting_turn_speed = 0;
     led.ColorWipe(led.Color(0, 0, 255), 1000);

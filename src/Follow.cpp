@@ -10,9 +10,13 @@ extern Voltage voltage;
 
 void Follow::Follow_Mode() {
   infrared.Send();
-  ultrasonic.Get_Distance();
-
+  
   if (millis() - follow_prev_time >= 100) {
+    ultrasonic.Get_Distance();
+    /*Serial.print("check: ");
+    Serial.println(millis());
+    Serial.print("distance: ");
+    Serial.println(ultrasonic.distance);*/
     IR_TRIGGERED ? infrared.ObjectIsDetected() : ultrasonic.ObjectIsDetected();
 
     follow_prev_time = millis();
