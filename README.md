@@ -4,6 +4,7 @@ Arduino Nano basierender 2-Rad-Roboter
 Features:
 - eigenständiges Balancieren
 - Follow Modus, in welchem der Roboter Gegenstände eigentständig verfolgt
+- Obstacle Modus, in welchem der Roboter Gegenstände eigentständig ausweicht
 - LED-Indikatoren für Batteriespannung und Objekterkennung
 
 ## Hardware-Komponenten
