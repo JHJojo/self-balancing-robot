@@ -4,10 +4,11 @@
 #include "Pins.h"
 #include <Arduino.h>
 
+// external instances of classes
 extern Mpu mpu;
 extern Motor motor;
 extern Balance balance;
-#define TARGETANGLE -2.5 //better value after attached fall support (without value should be 0)
+#define TARGETANGLE -2.5 // better value after attached fall support (without value should be 0)
 
 Balance::Balance() {
   // initialize PID parameters
@@ -33,7 +34,9 @@ void Balance::PID_Vertical() {
 }
 
 void Balance::PID_Steering() {
+  // PI control for horizontal stableness (rotation acis -> robot drives in straight line)
   steering_control_output = kp_steering * (mpu.gyroZ - setting_turn_speed) + ki_steering * steering_control_integral;
+  // integrate the steering error for the integral term
   steering_control_integral += (mpu.gyroZ - setting_turn_speed);
   // steering_control_integral += -setting_turn_speed;
 }

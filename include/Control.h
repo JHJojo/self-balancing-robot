@@ -3,17 +3,16 @@
 
 #include "State.h"
 
-class Control{
+class Control {
 public:
-    
-    void Init();
-    static void Button_State();
+  void Init();
+  // button state control function
+  static void Button_State();
+  // handle button events
+  void Button_Event_Handler();
 
-    void Button_Event_Handler();
-    
-    static int button_value;
-    FUNCTION_STATE function_state;
-
+  static int button_value;
+  FUNCTION_STATE function_state;
 };
 
 #endif

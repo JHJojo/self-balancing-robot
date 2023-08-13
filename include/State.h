@@ -5,6 +5,7 @@ enum FUNCTION_STATE
 {
   IDLE,
   FOLLOW,
+  OBSTACLE,
   LED
 };
 

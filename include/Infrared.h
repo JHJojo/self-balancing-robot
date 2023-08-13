@@ -4,7 +4,11 @@
 class Infrared {
 public:
   void Init();
-  void ObjectIsDetected();
+  // handle follow mode object detection
+  void ObjectIsDetectedFollow();
+  // handle obstacle mode object detection
+  void ObjectIsDetectedObstacle();
+  // send infrared signal
   void Send();
   static void Left_Receive();
   static void Right_Receive();

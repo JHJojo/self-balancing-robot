@@ -4,7 +4,6 @@
 #include "Motor.h"
 #include "Timer2.h"
 #include "Wire.h"
-#include "math.h"
 #include <Arduino.h>
 
 Timer2 timer2;

@@ -11,7 +11,7 @@
 #include "Ultrasonic.h"
 #include "Voltage.h"
 #include "Wire.h"
-#include "math.h"
+#include "Obstacle.h"
 #include <Arduino.h>
 
 
@@ -25,6 +25,7 @@ Infrared infrared;
 Follow follow;
 Led led;
 Control control;
+Obstacle obstacle;
 
 unsigned int follow_prev_time = 0;
 
@@ -50,7 +51,11 @@ void loop() {
     balance.setting_turn_speed = 0;
   } else if (control.function_state == FOLLOW) {
     follow.Follow_Mode();
-  } else if (control.function_state == LED) {
+  }else if (control.function_state == OBSTACLE)
+  {
+    obstacle.Obstacle_Mode();
+  }
+  else if (control.function_state == LED) {
     led.Off();
     balance.setting_car_speed = 0;
     balance.setting_turn_speed = 0;

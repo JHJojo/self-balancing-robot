@@ -5,7 +5,7 @@
 #include "Timer2.h"
 #include "Ultrasonic.h"
 #include "Wire.h"
-#include "math.h"
+#include "LED.h"
 #include <Arduino.h>
 
 Ultrasonic ultrasonic;
@@ -13,15 +13,17 @@ Timer2 timer2;
 Mpu mpu;
 Motor motor;
 Balance balance;
+Led led;
 
 int follow_prev_time = 0;
 
 void setup() {
+  led.Init();
   motor.Pin_init();
   motor.Encoder_init();
   timer2.Init(timer2.time);
   mpu.Init();
-  ultrasonic.Init();
+  //ultrasonic.Init();
   Serial.begin(9600);
   delay(100);
 }

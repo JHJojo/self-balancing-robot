@@ -10,6 +10,7 @@ public:
   Led() : Adafruit_NeoPixel(NUMPIXELS, RGB_PIN, NEO_GRB + NEO_KHZ800){}
   void Init();
 
+  // functions to control LED colors and modes
   void Off();
   void Red();
   void Green();

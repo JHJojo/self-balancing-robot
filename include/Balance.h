@@ -16,6 +16,8 @@ public:
   // function to set motor speed based on PID controllers
   void Total_Control();
 
+
+  // functions to move the robot
   void Stop();
   void Forward(int car_speed);
   void Back(int car_speed);
